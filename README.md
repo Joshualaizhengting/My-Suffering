@@ -1,1 +1,1 @@
-Watch me code with random stuff lol
+This is my python practice
