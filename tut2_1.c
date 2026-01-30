@@ -19,6 +19,9 @@ int main()
 int digitValue1(int num, int k){
     int count = 1;
     int value = 0; 
+ //why start count at 1?
+ //because we are dividing by 10 in a loop, the num will get divided one more time before the loop exits therefore we need to make sure that
+ //the value we want is not removed lol
 
     while (count < k){
         num /= 10;
@@ -43,3 +46,4 @@ void digitValue2(int num, int k, int *result){
     value = num % 10;
     *result = value;
 }
+
