@@ -129,8 +129,31 @@ def palindrome(word):
     else:
         print("String is not a palindrone")
 
+#using both stack and queues
+def palin(word):
+    stack = Stack()
+    queue = Queue()
+
+    word = word.upper()
+    for char in word:
+        if char.isalnum():
+            stack.push(char)
+            queue.enqueue(char)
+
+    #using both properties of stack and queue we can easily compare the two ends
+    while stack.ll.size > queue.ll.size:
+        stack.pop()
+    while not stack.is_empty():
+        if stack.pop() != queue.dequeue():
+            print("String is not a palindrome")
+            return False
+    print("String is a palindrome")
+    return True
+        
+
 if __name__ == "__main__":
     print("Sample String : A man a plan a canal Panama")
     palindrome("A man a plan a canal Panama")
     print("Sample String : Superman in the sky")
+
     palindrome("Superman in the sky")
