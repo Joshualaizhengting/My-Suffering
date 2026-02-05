@@ -84,7 +84,7 @@ def balanced(expression):
                 return False
             stack.pop()    
     return stack.isEmpty()
-
+#check if stack is empty in case of (() situations 
 
 
 if __name__ == "__main__":
@@ -95,3 +95,4 @@ if __name__ == "__main__":
         else:
 
             print(f"Expression {expr} is not balanced")
+
