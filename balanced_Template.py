@@ -87,6 +87,21 @@ def balanced(expression):
 #check if stack is empty in case of (() situations 
 
 
+
+#matching dictionary
+def balanced(expression):
+    stack = Stack()
+    matching = {')': '(', ']': '[', '}': '{'}
+
+    for char in expression:
+        if char in '({[':
+            stack.push(char)
+        elif char in ')}]':
+            if stack.isEmpty() or stack.pop != matching[char]:
+                return False
+    #same as above but implementing the use of dictionary to shorten the lengthy code above
+    return stack.isEmpty()
+
 if __name__ == "__main__":
     expressions = ["()", "[()]", "{[]()[]}", "[({{)])"]
     for expr in expressions:
@@ -95,4 +110,5 @@ if __name__ == "__main__":
         else:
 
             print(f"Expression {expr} is not balanced")
+
 
