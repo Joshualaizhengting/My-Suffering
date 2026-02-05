@@ -80,10 +80,10 @@ def balanced(expression):
         if char in "{[(":
             stack.push(char)
         elif char in "}])":
-            if not stack or (char == "}" and stack.ll.head.item != "{") or (char == ")" and stack.ll.head.item != "(") or (char == "]" and stack.ll.head.item != "["):
+            if stack.isEmpty or (char == "}" and stack.ll.head.item != "{") or (char == ")" and stack.ll.head.item != "(") or (char == "]" and stack.ll.head.item != "["):
                 return False
             stack.pop()    
-    return True
+    return stack.isEmpty()
 
 
 
@@ -93,4 +93,5 @@ if __name__ == "__main__":
         if balanced(expr):
             print(f"Expression {expr} is balanced")
         else:
+
             print(f"Expression {expr} is not balanced")
