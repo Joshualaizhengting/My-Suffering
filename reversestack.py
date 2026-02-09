@@ -66,8 +66,19 @@ def reverseStack(stack):
     stack.size = new_stack.size
     return stack
 
+#alternatively we can also use a queue
+def reverseSt(stack):
+    if stack.is_empty():
+        return stack
 
+    queue = Queue()
+    whle not stack.is_empty():
+        queue.enqueue(stack.pop())
 
+    while not queue.is_empty():
+        stack.push(queue.dequeue())
+    return stack
+    
 
 if __name__ == "__main__":
     stack = Stack()
@@ -92,3 +103,4 @@ if __name__ == "__main__":
             break
         else:
             print("Choice unknown;")
+
