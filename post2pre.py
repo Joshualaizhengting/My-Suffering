@@ -52,6 +52,8 @@ def pos2pre(expr):
 
         if chr.isalnum():
             stack.push(chr)
+
+        !!! error need to fix 
         
         elif chr in PRESCEDENCE:
             temp = ""
@@ -78,4 +80,5 @@ if __name__ == "__main__":
         prefix.pop()
     
     print(f"Prefix expression: {result}")
+
 
