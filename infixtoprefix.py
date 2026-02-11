@@ -26,39 +26,33 @@ class Stack:
     def pop(self):
         if self.isEmpty():
             raise IndexError("Pop from empty stack")
-        
-        popped = self.top
         self.top = self.top.next
         self.size -= 1
-        return popped.data
 
     def peek(self):
         if self.isEmpty():
             raise IndexError("Peek from empty stack")
         return self.top.data
+
 def in2preS(expr):
 # Write your code here #
     #reverse the expression
-    result = ""
-    j = 0
-    for char in expr:
-        temp = expr[j]
-        result += temp
-        j+=1
     
-    revstr = ""
+    result = expr[::-1]
+    
+    revstr = []
     #handling closed brackets
-    for char in reversed(result):
+    for char in result:
         if char == '(':
-            revstr += ')'
+            revstr.append(')')
         elif char == ')':
-            revstr += '('
+            revstr.append('(')
         else:
-            revstr += char
+            revstr.append(char)
 
     stack = Stack()
 
-    nresult = ""
+    nresult = []
     i = 0
     while i < len(revstr):
         newchar = revstr[i]
@@ -67,33 +61,48 @@ def in2preS(expr):
             i += 1
             continue
     
-        if newchar.isalnum():
-            nresult += newchar
-        
+        if newchar.isalnum():    
+            nresult.append(newchar)
+
         elif newchar == '(':
             stack.push(newchar)
         
         elif newchar == ')':
             while not stack.isEmpty() and stack.peek() != '(':
-                nresult += stack.pop()
-            stack.pop()
+                nresult.append(stack.peek())
+                stack.pop()
+            if not stack.isEmpty() and stack.peek() == '(':
+                stack.pop()
 
         elif newchar in PRECEDENCE:
             while (not stack.isEmpty() and stack.peek() != '(' and hasHigherpres(stack.peek(), newchar)): 
-                nresult += stack.pop()
+                nresult.append(stack.peek())
+                stack.pop()
+                
             stack.push(newchar)
         
         i+= 1
-    while not stack.isEmpty():
-        nresult += stack.pop()
 
-    final = nresult[::-1]
-    stack.push(final)
+    while not stack.isEmpty():
+        if stack.peek() != '(':
+            nresult.append(stack.peek())
+            stack.pop()
+        else: 
+            stack.pop()
+
+    finalstack = Stack()
     
-    return stack
+
+    for char in nresult: 
+        finalstack.push(char)
+    
+    return finalstack
 
 def hasHigherpres(op1, op2, precedence = PRECEDENCE):
-    return precedence.get(op1, 0) >= precedence.get(op2, 0)
+
+    #apparently the model answer is WRONG => presedence for popping out the stack.top should STRICTLY always be of higher prescedence 
+    #no 2 values of the same prescedence can exist in the stack at the same time
+    return precedence.get(op1, 0) > precedence.get(op2, 0)
 
 if __name__ == "__main__":
     infix = input("Enter infix expression: ")
