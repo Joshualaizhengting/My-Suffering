@@ -25,20 +25,35 @@ def printSmallerValues(node, m):
     if node is None:
         return
     
+
+    #preorder traversal
+
+    if node.item < m:
+        print(node.item, end=", ")
+
     #check left
     printSmallerValues(node.left, m)
-        
-    if node.item < m:
-        print(node.item)
+    
     
     #check right
     printSmallerValues(node.right, m)
+
+
+
+#cannot use preorder traversal
+def countnumsmall(node, m):
+    #must wait for the return value which means postorder traversal
     
+    if node is None:
+        return 0
     
+    countleft = countnumsmall(node.left, m)
+    countright = countnumsmall(node.right, m)
+    curr = 0
+    if node.item < m:
+        curr += 1
 
-
-
-
+    return curr + countleft + countright
 
 if __name__ == "__main__":
     root = BTNode(4)
@@ -55,8 +70,11 @@ if __name__ == "__main__":
     print_tree_in_order(root)
     print()
     
+    
     # Using a hardcoded value instead of input()
-    m = 4  # You can change this value for testing
+    m = 3  # You can change this value for testing
     print(f"\nThe values smaller than {m} are:", end=" ")
     printSmallerValues(root, m)
+    count = countnumsmall(root,m)
+    print(f"\nThere are {count} numbers smaller than {m}")
     print()
