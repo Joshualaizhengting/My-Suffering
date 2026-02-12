@@ -54,7 +54,8 @@ def countnumsmall(node, m):
         curr += 1
 
     return curr + countleft + countright
-
+    
+    
 if __name__ == "__main__":
     root = BTNode(4)
     root.left = BTNode(5)
