@@ -25,10 +25,9 @@ def mirrorTree(node):
     if node is None:
         return
     else:
-        mirrorTree(node.right)
-        mirrorTree (node.left)
-        
+         mirrorTree(node.left)
         node.right, node.left = node.left, node.right
+        mirrorTree (node.left)
 
 
 
@@ -53,4 +52,5 @@ if __name__ == "__main__":
     printTree(root)
     print("\nMirrored Tree (In-Order):")
     print_tree_in_order(root)
+
     print()
