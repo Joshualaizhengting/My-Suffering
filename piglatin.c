@@ -16,19 +16,30 @@ int main(){
 
 void PigLatin(char *eword, char *PLword){
  /* Write your code here */
-    char vowels[40] = "aeiouyAEIOUY";
+    char vowels[20] = "aeiouyAEIOUY";
     char ay[10] = "ay";
-    
+    int len = strlen(eword);
+    int count = 0;
+
     if (strchr(vowels, eword[0])){
         strcpy(PLword, eword);
         strcat(PLword, ay);
-
     }else{
-        int len = strlen(eword);
-        for (int i =0; i<len -1; i++){
-            PLword[i] = eword[i+1];
+        for (int i = 0; i<len; i++){
+            if (!(strchr(vowels, eword[i]))){
+                count++;
+            } else {
+                break;
+            }
         }
-        PLword[len-1] = eword[0];
+        for (int i=0; i<len-count; i++){
+            PLword[i] = eword[count+i];
+        }
+        PLword[len-count] = '\0';
+        eword[count] = '\0';
+        strcat(PLword, eword);
         strcat(PLword, ay);
+        
     }
+    
 }
