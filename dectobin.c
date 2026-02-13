@@ -18,13 +18,15 @@ void readIn(int *num){
 }
 
 void calculate(int *num, int *result){
-    int remainder = 1, value = 0, count = 0;
+    int remainder = 0, value = 0, multiplier = 1;
 
     while (*num > 0){
         value = *num%2;
-        remainder = remainder * pow(10,count) + value;
+        remainder = mulitplier*value + remainder;
+        multiplier *= 10;
         *num = *num / 2;
-        count ++;
+        
     }
     *result = remainder;
+
 }
